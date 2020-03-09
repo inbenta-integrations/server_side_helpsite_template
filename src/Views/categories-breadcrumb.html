@@ -1,0 +1,18 @@
+<?php if(count($breadcrumb) > 0): ?>
+<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="inbenta-km__breadcrumb">
+  <?php $i = 0 ?>
+  <?php foreach ($breadcrumb as $name => $url): ?>
+  <?php if($name !== 'root'): ?>
+  <li class="inbenta-km__breadcrumb__element<?= ($i === count($breadcrumb) - 1) ? ' inbenta-km-active' : '' ?>"
+    itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <a itemprop="item" href="<?= $url ?>">
+      <span class="breadcrumb-back inbenta-km-icon"></span>
+      <span class="inbenta-km__breadcrumb__element__title" itemprop="name"><?= $name ?></span>
+      <meta itemprop="position" content="<?= $i ?>" />
+    </a>
+  </li>
+  <?php endif; ?>
+  <?php $i++; ?>
+  <?php endforeach ?>
+</ol>
+<?php endif; ?>

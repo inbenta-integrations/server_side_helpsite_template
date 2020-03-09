@@ -1,0 +1,22 @@
+<?php if($category['numContentsDescendants'] > 0): ?>
+<div
+  class="container__category <?= 'container__category--' . $depth ?><?= (strpos($currentSlug, $category['seoFriendlyUrl']) === 0) ? ' container__category--active' : '' ?>">
+  <a href="<?= $category['seoFriendlyUrl'] ?>" class="container__category__title">
+    <span class="title__icon"></span>
+    <span class="title__text"><?= $sanitize($category['name']); ?></span>
+  </a>
+  <div class="container__category__children">
+    <?php if(count($category['subCategories']) > 0): ?>
+    <?php foreach ($category['subCategories'] as $subCategory): ?>
+    <?=
+      $fetch('categories-sidebar-branch.html', [
+      'depth' => $depth + 1,
+      'category' => $subCategory,
+      'currentSlug' => $currentSlug,
+      ]);
+    ?>
+    <?php endforeach; ?>
+    <?php endif; ?>
+  </div>
+</div>
+<?php endif; ?>

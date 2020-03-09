@@ -1,0 +1,34 @@
+<div class="inbenta-km__faqs">
+  <?php foreach ($contents as $content): ?>
+  <div class="inbenta-km__faq<?= (count($contents) === 1 && $autoClick === true) ? ' inbenta-km__faq--active' : '' ?>">
+    <a class="inbenta-km__faq__title" href="<?= $content['seoFriendlyUrl'] ?>">
+      <span class="title__icon"></span>
+      <div class="title__faq">
+        <h3 class="title__faq__text"><?= $sanitize($content['title']); ?></h3>
+        <span class="title__faq__icon inbenta-km-icon"></span>
+      </div>
+    </a>
+    <div class="inbenta-km__faq__body">
+      <?php foreach ($options['settingsToShow'] as $attribute): ?>
+      <div class="body__contents">
+        <?php if(isset($content['attributes']) && isset($content['attributes'][$attribute])): ?>
+        <span class="body__contents__item"><?= $content['attributes'][$attribute] ?></span>
+        <?php endif; ?>
+      </div>
+      <?php endforeach; ?>
+      <?php if(isset($options['showRelated']) && $content['hasRelated'] === true): ?>
+      <?= $fetch('related.html', [
+        'settingsToShow' => $options['settingsToShow'],
+        'contentId' => $content['id'],
+        'related' => $content['related'],
+      ]); ?>
+      <?php endif; ?>
+      <div class="body__rating">
+        <?php if(isset($content['tracking']) && isset($content['tracking']['rateCode'])): ?>
+        <?= $fetch('ratings.html', [ 'rateCode' => $content['tracking']['rateCode'] ]); ?>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+  <?php endforeach; ?>
+</div>

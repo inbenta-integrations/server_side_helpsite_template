@@ -1,0 +1,30 @@
+<?php if(count($options['ratings']) > 0): ?>
+<div class="inbenta-km__rating">
+  <div class="inbenta-km__rating__content">
+    <div class="content__phrase"><?= $translate('RATINGS_INTRODUCTION'); ?></div>
+    <div class="content__buttons">
+      <?php foreach ($options['ratings'] as $rating): ?>
+      <div class="content__buttons__button-wrapper">
+        <?= $fetch('button.html', [ 'label' => $translate($rating['label']), 'disabled' => false ]); ?>
+        <input class="rating-data" type="hidden" name="id" value="<?= $rating['id'] ?>">
+        <input class="rating-data" type="hidden" name="code" value="<?= $rateCode ?>">
+        <input class="rating-data" type="hidden" name="comment" value="<?= $rating['comment'] ?>">
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+  <div class="inbenta-km__rating__comment  inbenta-km__rating__comment--hidden">
+    <div class="comment__phrase"><?= $translate('RATINGS_COMMENT_INTRODUCTION'); ?></div>
+    <div class="comment__feedback">
+      <textarea placeholder="<?= $translate('RATINGS_COMMENT_PLACEHOLDER'); ?>" value="comment"
+        class="inbenta-km-input comment__feedback__textarea"></textarea>
+      <div class="content__buttons__button-wrapper comment__feedback__button">
+        <?= $fetch('button.html', [ 'label' => $translate('RATINGS_SUBMIT_COMMENT_BUTTON'), 'disabled' => false ]); ?>
+      </div>
+    </div>
+  </div>
+  <div class="inbenta-km__rating__thanks inbenta-km__rating__thanks--hidden">
+    <?= $translate('RATINGS_GRETTINGS_TEXT'); ?>
+  </div>
+</div>
+<?php endif; ?>

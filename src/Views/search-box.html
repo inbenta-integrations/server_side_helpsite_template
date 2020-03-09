@@ -1,0 +1,15 @@
+<div class="inbenta-km__search">
+  <form class="inbenta-km__search__form" accept-charset="UTF-8" action="<?= $action ?>" method="GET">
+    <span class="form__icon"></span>
+    <?= $fetch('input.html', [ 'label' => $translate('SEARCH_BOX_PLACEHOLDER'), 'inputClass' => 'form__input' ]); ?>
+    <div class="form__button">
+      <?= $fetch('button.html', [
+      'label' => $translate('SEARCH_BOX_BUTTON'),
+      'inputClass' => 'form__input',
+      'disabled' => true,
+      ]); ?>
+    </div>
+    <div class="inbenta-km__autocompleter inbenta-km-hidden">
+    </div>
+  </form>
+</div>

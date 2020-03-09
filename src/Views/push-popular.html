@@ -1,0 +1,8 @@
+<?php if(count($pushpopularResults) > 0): ?>
+<div class="inbenta-km__popular">
+  <?= $fetch('title.html', [ 'title' => $translate('PUSHPOPULAR_TITLE') ]); ?>
+
+  <div class="inbenta-km-subtitle"><?= $translate('PUSHPOPULAR_TEXT'); ?></div>
+  <?= $fetch('contents.html', [ 'contents' => $pushpopularResults, 'autoClick' => false ]); ?>
+</div>
+<?php endif; ?>

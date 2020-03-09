@@ -1,0 +1,25 @@
+{
+  "name": "inbenta/server_side_helpsite",
+  "version": "1.0.1",
+  "description": "Inbenta server-side Helpsite",
+  "keywords": [],
+  "prefer-stable": true,
+  "license": "MIT",
+  "require": {
+    "php": "^7",
+    "slim/slim": "^3.12",
+    "symfony/http-foundation": "^4.3",
+    "slim/php-view": "^2.2",
+    "ext-memcached": "*",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*",
+    "symfony/dotenv": "^4.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Inbenta\\ServerSideHelpsite\\": "src/"
+    }
+  }
+}

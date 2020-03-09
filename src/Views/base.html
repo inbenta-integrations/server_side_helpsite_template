@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="<?= $lang ?>">
+
+<head>
+  <!-- Global meta data. -->
+  <title><?= $title ?></title>
+  <link rel="canonical" href="<?= $canonical ?>">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name="robots" content="<?= $robots ?>">
+  <meta name="title" content="<?= $title ?>">
+  <meta name="description" content="<?= $description ?>">
+  <meta name="keywords" content="<?= join(',', $metaData['keywords']); ?>">
+
+  <!-- Open Graph meta definitions. -->
+  <meta property="og:title" content="<?= $metaData['ogTitle'] ?>">
+  <meta property="og:type" content="<?= $metaData['ogType'] ?>">
+  <meta property="og:image" content="<?= $metaData['ogImage'] ?>">
+  <meta property="og:site_name" content="<?= $metaData['ogSiteName'] ?>">
+
+  <!-- Fallback to homescreen for Chrome < 39 on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="">
+  <link rel="shortcut icon" type="image/x-icon" href="<?= $metaData['shortcutIcon'] ?>">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="<?= $title ?>">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Default assets. -->
+  <script type="text/javascript" src="/assets/js/main.js" async></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/styles.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="https://sdk.inbenta.io/km/1.22.3/space-cowboy.css">
+  <link rel="icon" href="<?= $metaData['favicon'] ?>" type="image/x-icon">
+
+  <!-- Custom assets. -->
+  <?php foreach ($customAssets as $customAssetPath): ?>
+  <?php if(pathinfo($customAssetPath)['extension'] === 'css'): ?>
+  <link rel="stylesheet" type="text/css" media="screen" href="<?= $customAssetPath ?>">
+  <?php elseif(pathinfo($customAssetPath)['extension'] === 'js'): ?>
+  <script type="text/javascript" src="<?= $customAssetPath ?>" async></script>
+  <?php endif; ?>
+  <?php endforeach; ?>
+</head>
+
+<body>
+  <div class="inbenta-helpsite">
+    <?= $header ?>
+    <div class="inbenta-helpsite__body" id="inbenta-body">
+      <?= $content ?>
+    </div>
+    <?= $footer ?>
+  </div>
+</body>

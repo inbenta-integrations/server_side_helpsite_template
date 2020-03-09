@@ -1,0 +1,65 @@
+# ----------------------------------------------------------------------
+# Rewrite rules
+# ----------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirect every request to HTTPS...
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R]
+
+    # Static serving of all public assets...
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f
+    RewriteRule ^(.*)$ $1 [END]
+
+    # Redirect every other route to index.php...
+    RewriteCond %{REQUEST_URI} !index.php
+    RewriteRule ^ index.php [L]
+
+    # Redirect all sitemap patterns request to sitemap file...
+    RewriteRule ^sitemap.xml sitemap.php [L]
+    RewriteRule ^sitemap sitemap.php [L]
+
+    # Avoid showing sourcemap in production...
+    RewriteCond %{HTTP_HOST} !^localhost
+    RewriteRule ^(?!empty.map)(.*).map$ /empty.map [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+
+# ----------------------------------------------------------------------
+# Gzip compression and cache
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css text/javascript text/json application/x-javascript application/javascript application/json image/x-icon image/ico image/icon image/vnd.microsoft.icon application/x-font-woff application/font-woff application/octet-stream application/vnd.ms-fontobject font/opentype image/svg+xml
+    </IfModule>
+
+    # Cache text, css, and javascript files for one week...
+    <FilesMatch ".(js|css|pdf|txt)$">
+        Header set Cache-Control "max-age=604800"
+    </FilesMatch>
+
+    # Cache images and flash content for one week...
+    <FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|png)$">
+        Header set Cache-Control "max-age=604800"
+    </FilesMatch>
+
+    <FilesMatch ".(eot|ttf|otf|woff)">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+
+# ----------------------------------------------------------------------
+# Add types
+# ----------------------------------------------------------------------
+# Set appropriate mime for svg
+AddType image/svg+xml svg svgz

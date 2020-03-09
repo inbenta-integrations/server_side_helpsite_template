@@ -1,0 +1,7 @@
+User-Agent: LinkChecker
+Allow: /
+
+User-agent: *
+<?=$robotRule ?>: /
+
+Sitemap: <?=$sitemapUrl?>

@@ -1,0 +1,52 @@
+<?php if(!is_null($baseCategory) && count($categoryContents) > 0 || count($subCategories) > 0): ?>
+<div class="inbenta-km__categories">
+  <?php if(intval($baseCategory['id']) === 0): ?>
+  <h2 class="inbenta-km-title"><?= $translate('CATEGORIES_TITLE'); ?></h2>
+  <?php endif; ?>
+  <div class="inbenta-km__categories__container">
+
+    <?php if(intval($baseCategory['id']) !== 0): ?>
+    <div class="container__category-name">
+      <span class="container__category-name__title"><?= $sanitize($baseCategory['name']); ?></span>
+      <div class="container__category-name__button-wrapper">
+        <a class="inbenta-km-button" href="<?= $backUrl ?>">
+          <span class="inbenta-km-button__text">
+            <?= $translate('CATEGORIES_BACK_BUTTON') ?>
+          </span>
+        </a>
+      </div>
+    </div>
+    <?php endif; ?>
+
+    <?php if(count($subCategories) > 0 && count($subCategories[0]) > 0): ?>
+    <div class="container__category">
+      <?php foreach ($subCategories as $group): ?>
+      <?php if($group[0]['numContentsDescendants'] > 0): ?>
+      <div class="container__category__group">
+        <?php foreach ($group as $category): ?>
+        <?php if($category['numContentsDescendants'] > 0): ?>
+        <div class="inbenta-km__category" class="'inbenta-km__category--<?= $category['id'] ?>">
+          <span class="inbenta-km__category__image inbenta-km-icon"></span>
+          <a class="inbenta-km__category__content-category" href="<?= $category['seoFriendlyUrl'] ?>">
+            <span class="content-category__icon inbenta-km-icon"></span>
+            <span class="content-category__title"><?= $sanitize($category['name']); ?></span>
+          </a>
+        </div>
+        <?php endif; ?>
+        <?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <a></a>
+
+    <?php if(count($categoryContents) > 0): ?>
+    <div class="container__category-contents">
+      <?= $fetch('contents.html', [ 'contents' => $categoryContents, 'autoClick' => true ]); ?>
+    </div>
+    <?php endif; ?>
+
+  </div>
+</div>
+<?php endif; ?>

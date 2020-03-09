@@ -1,0 +1,34 @@
+<div class="inbenta-km__results">
+  <div class="inbenta-km__results__button">
+    <a class="inbenta-km-button" href="<?= $backUrl ?>">
+      <span class="inbenta-km-button__text">
+        <?= $translate('RESULTS_BACK_BUTTON') ?>
+      </span>
+    </a>
+  </div>
+  <?php if(count($results) > 0): ?>
+  <div class="inbenta-km__results__contents">
+    <?php if($displayTitle === true): ?>
+    <h2 class="inbenta-km-title"><?= $translate('RESULTS_TITLE'); ?></h2>
+    <?php if($lastQuery !== ''): ?>
+    <div class="inbenta-km-subtitle contents__title">
+      <div class="contents__title__text"><?= $translate('RESULTS_TITLE'); ?></div>
+      <div class="contents__title__query">'<?= $lastQuery ?>'</div>
+    </div>
+    <?php endif; ?>
+    <?php endif; ?>
+    <div class="inbenta-km__results__extended">
+      <?= $fetch('contents.html', [ 'contents' => $results, 'autoClick' => true ]); ?>
+      <?php if($searchRateCode !== '' && $options['showSearchRating'] === true): ?>
+      <?= $fetch('ratings.html', [ 'rateCode' => $searchRateCode ]); ?>
+      <?php endif; ?>
+    </div>
+  </div>
+  <?php else: ?>
+  <div class="inbenta-km__results__not-found">
+    <h2 class="inbenta-km-title"><?= $translate('RESULTS_NOT_FOUND_TITLE'); ?></h2>
+    <span class="not-found__text"><?= $translate('RESULTS_NOT_FOUND_TEXT'); ?></span>
+    <span class="not-found__text">'<?= $lastQuery ?>'</span>
+  </div>
+  <?php endif; ?>
+</div>

@@ -1,0 +1,17 @@
+<?php if(count($related) > 0): ?>
+<div class="inbenta-km__related">
+  <div class="inbenta-km__related__title"><?= $translate('RELATED_INTRODUCTION'); ?></div>
+  <?php foreach ($related as $content): ?>
+  <div class="inbenta-km__related__faq">
+    <div class="inbenta-km__faq">
+      <a class="inbenta-km__faq__title" href="<?= $content['seoFriendlyUrl'] ?>">
+        <div class="title__faq">
+          <h3 class="title__faq__text"><?= $sanitize($content['title']); ?></h3>
+          <span class="title__faq__icon inbenta-km-icon"></span>
+        </div>
+      </a>
+    </div>
+  </div>
+  <?php endforeach; ?>
+</div>
+<?php endif; ?>

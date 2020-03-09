@@ -1,0 +1,16 @@
+<?php if(count($category['subCategories']) > 0): ?>
+<div class="inbenta-km__categories inbenta-km__categories--sidebar">
+  <h2 class="inbenta-km-title"><?= $translate('CATEGORIES_SIDEBAR_TITLE') ?></h2>
+  <div class="inbenta-km__categories--sidebar__container">
+    <?php foreach ($category['subCategories'] as $subCategory): ?>
+    <?=
+      $fetch('categories-sidebar-branch.html', [
+        'depth' => 0,
+        'category' => $subCategory,
+        'currentSlug' => $currentSlug,
+      ]);
+    ?>
+    <?php endforeach; ?>
+  </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,8 @@
+<?php if(count($pushResults) > 0): ?>
+<div class="inbenta-km__push">
+  <?= $fetch('title.html', [ 'title' => $translate('PUSH_TITLE') ]); ?>
+
+  <div class="inbenta-km-subtitle"><?= $translate('PUSH_TEXT'); ?></div>
+  <?= $fetch('contents.html', [ 'contents' => $pushResults, 'autoClick' => false ]); ?>
+</div>
+<?php endif; ?>
